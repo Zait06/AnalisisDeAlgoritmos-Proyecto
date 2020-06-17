@@ -1,13 +1,14 @@
 import "./styles/main.scss";
 
-
 import { Rectangulo } from './js/Rectangulo'; // Importamos la clase Rectangulo
+const { UI } = require('./js/UI');
 
-var rec = new Rectangulo(5,25,20,10)
-var result = document.getElementById('result');
+// document.getElementById('button').addEventListener('click', () =>{
 
-console.log("Area del rectangulo: "+(rec.getArea()));
+//     const ui = new UI();
+//     var rec = new Rectangulo(5,25,20,10);
+//     ui.render(rec.getArea());
+// });
 
-result.innerHTML = rec.getArea();
 
 
