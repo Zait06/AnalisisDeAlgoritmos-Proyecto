@@ -1,23 +1,30 @@
 {
-  "name": "analisisdealgoritmos-proyecto",
+  "name": "AnalisisDeAlgoritmos-Proyecto",
   "version": "1.0.0",
-  "description": "Proyecto",
-  "main": "main.js",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "test": "test",
-    "start": "node server.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Zait06/AnalisisDeAlgoritmos-Proyecto.git"
   },
-  "author": "Zait",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Zait06/AnalisisDeAlgoritmos-Proyecto/issues"
   },
   "homepage": "https://github.com/Zait06/AnalisisDeAlgoritmos-Proyecto#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "css-loader": "^3.6.0",
+    "html-webpack-plugin": "^4.3.0",
+    "mini-css-extract-plugin": "^0.9.0",
+    "node-sass": "^4.14.1",
+    "sass-loader": "^8.0.2",
+    "style-loader": "^1.2.1",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
   }
 }
