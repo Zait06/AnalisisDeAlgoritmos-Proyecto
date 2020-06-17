@@ -1,10 +1,13 @@
-import { Rectangulo } from './Rectangulo'; // Importamos la clase Rectangulo
-import  "./styles.scss";
+import "./styles/main.scss";
+
+
+import { Rectangulo } from './js/Rectangulo'; // Importamos la clase Rectangulo
 
 var rec = new Rectangulo(5,25,20,10)
+var result = document.getElementById('result');
 
-function init(){
-    console.log("Area del rectangulo: "+(rec.getArea()));
-}
+console.log("Area del rectangulo: "+(rec.getArea()));
 
-window.onload = init;
+result.innerHTML = rec.getArea();
+
+

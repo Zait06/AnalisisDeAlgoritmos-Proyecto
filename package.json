@@ -1,10 +1,11 @@
 {
-  "name": "AnalisisDeAlgoritmos-Proyecto",
+  "name": "analisisdealgoritmos-proyecto",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rimraf public && webpack --config webpack/webpack.config.js -p",
+    "start": "webpack-dev-server --config webpack/webpack.config.js -d"
   },
   "repository": {
     "type": "git",
@@ -18,13 +19,20 @@
   },
   "homepage": "https://github.com/Zait06/AnalisisDeAlgoritmos-Proyecto#readme",
   "dependencies": {
+    "autoprefixer": "^9.8.0",
     "css-loader": "^3.6.0",
+    "file-loader": "^6.0.0",
     "html-webpack-plugin": "^4.3.0",
     "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.14.1",
+    "postcss-loader": "^3.0.0",
+    "rimraf": "^3.0.2",
     "sass-loader": "^8.0.2",
     "style-loader": "^1.2.1",
-    "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.11"
+    "webpack": "^4.43.0"
+  },
+  "devDependencies": {
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.11.0"
   }
 }
