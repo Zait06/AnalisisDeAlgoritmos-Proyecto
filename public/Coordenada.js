@@ -13,4 +13,4 @@ class Coordenada{
     }
 }
 
-module.exports = Coordenada;
+// module.exports = Coordenada;
