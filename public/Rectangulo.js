@@ -1,5 +1,5 @@
 // Importamos la clase coordenada
-const Coordenada = require("./Coordenada.js");
+var Coordenada = require("./Coordenada.js");
 
 class Rectangulo{
     constructor(x1,y1,x2,y2){

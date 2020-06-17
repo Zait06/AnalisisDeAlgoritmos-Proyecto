@@ -1,5 +1,8 @@
-const Rectangulo = require('./Rectangulo.js');
+var Rectangulo = require('./Rectangulo.js');
 
-var rec = new Rectangulo(5,25,20,10);
+function init(){
+    var rec = new Rectangulo(5,25,20,10);
+    console.log(rec.getArea());
+}
 
-console.log(rec.getArea());
+window.onload = init;

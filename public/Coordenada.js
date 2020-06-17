@@ -1,3 +1,5 @@
+'use strict';
+
 class Coordenada{
     constructor(x,y){
         this.x = x;     // Coordenada X
