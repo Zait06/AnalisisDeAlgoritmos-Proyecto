@@ -1,4 +1,4 @@
-var Rectangulo = require('./Rectangulo.js');
+const Rectangulo = require('./Rectangulo.js');
 
 function init(){
     var rec = new Rectangulo(5,25,20,10);
