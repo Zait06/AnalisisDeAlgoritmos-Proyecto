@@ -57,8 +57,7 @@ module.exports = {
                 html5: true,
                 collapseWhitespace: true,
                 caseSensitive: true,
-                removeComments: true,
-                removeEmptyElements: true
+                removeComments: true
             }
         }),
         new MiniCssExtractPlugin({
