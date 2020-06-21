@@ -12,4 +12,10 @@ export class Coordenada{
     getY(){         // Obtener coordeanda Y
         return this.y;
     }
+
+    getDistance(centro){
+        let x0 = centro.getX();
+        let y0 = centro.getY();
+        this.distance = Math.sqrt(Math.pow((x0-this.x),2)+Math.pow((y0-this.y),2))
+    }
 }
