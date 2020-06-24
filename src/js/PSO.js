@@ -20,8 +20,8 @@ export class Particle{
             break;
         }
         this.score = 0;
-        this.best_score = 100e10;
-        this.bp = []
+        this.best_score = 100e10;   // Mejor puntuacion 
+        this.bp = []    // Vector de posicion con mejor puntacion
     }
 
     initRect(){
@@ -55,5 +55,91 @@ export class Particle{
     
     getVelocity(){
         return this.velocity;
+    }
+
+    // funcion para calcular el puntaje de la paticula
+    score_function(){
+        this.score = Math.random()*101; // Igualar a la función objetivo
+        if(this.score < this.best_score){   // Minimización
+            this.best_score = this.score;
+            this.bp = this.position;
+        }
+    }
+
+    /*
+        Calcular la velocidad de la particula
+        v=α(bp−p)+β(gbp−p)
+    */
+    calculate_velocity(gbp,alpha=0.6,beta=0.6){
+        this.velocity = this.sum(this.multScalar(alpha,this.sub(this.bp,this.position)),
+                                this.multScalar(beta,this.sub(gbp,this.position)));
+        this.position = this.sum(this.position,this.velocity)
+    }
+
+    sum(a,b){
+        let opera = [];
+        for(let i=0;i<this.length;i++)
+            opera.push(a[i]+b[i]);
+        return opera;
+    }
+
+    sub(a,b){
+        let opera = [];
+        for(let i=0;i<this.length;i++)
+            opera.push(a[i]-b[i]);
+        return opera;
+    }
+
+    multScalar(scalar,a){
+        let opera = [];
+        for(let i=0;i<this.length;i++)
+            opera.push(scalar*a[i]);
+        return opera;
+    }
+}
+
+export class PSO{
+    constructor(num,genera,figura){
+        this.figure = figura;
+        this.best_score = 100e10;
+        this.gbp = []
+        this.num_population = num;
+        this.population = [];       // particles
+        this.generations = genera;
+    }
+
+    run_pso(){
+        var scores = [];        // Puntuaciones de la particula
+        var best_scores = [];   // Mejores puntuaciones
+        var i;
+        // Generación de la poblacion
+        for(i=0;i<this.num_population;i++)
+            this.population.push(new Particle(this.figure));
+        
+        // Corriendo el algoritmo
+        i=0;
+        while(i<this.generations){
+            // Se calcula el socre de cada particula
+            for(let p of this.population){
+                p.score_function();
+                scores.push([p.score,p.position]);
+            }
+            // Obtenemos el mejor puntaje de la poblacion
+            scores.sort((aa,bb)=>{  // Minimizar el problema
+                let a = aa[0];
+                let b = bb[0];
+                return a-b;
+            });
+            best_scores.push(scores[0][0]);
+            if(scores[0][0]<this.best_score){
+                this.best_score = scores[0][0];
+                this.gbp = scores[0][1];
+            }
+            // Calculamos las velocidades de cada particula
+            for(let p of this.population)
+                p.calculate_velocity(this.gbp);
+            scores = [];
+            i++;
+        }
     }
 }
