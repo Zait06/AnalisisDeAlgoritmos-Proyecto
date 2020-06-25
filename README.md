@@ -19,6 +19,10 @@ Este es un proyecto escolar, el cuál, consiste en un algoritmo evolutivo que ti
     * npm i css-loader style-loader
     * npm i node-sass sass-loader
     * npm i mini-css-extract-plugin
+    * npm i autoprefixer
+    * npm i file-loader
+    * npm i postcss-loader
+    * npm i rimraf
 	
 - Numjs:
 	* npm i windows-build-tools (Ejecutar como administrador)
