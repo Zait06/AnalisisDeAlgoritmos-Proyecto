@@ -19,7 +19,8 @@
   },
   "homepage": "https://github.com/Zait06/AnalisisDeAlgoritmos-Proyecto#readme",
   "dependencies": {
-    "autoprefixer": "^9.8.0",
+    "@aas395/numjs": "^0.16.3",
+    "autoprefixer": "^9.8.4",
     "css-loader": "^3.6.0",
     "file-loader": "^6.0.0",
     "html-webpack-plugin": "^4.3.0",
@@ -32,7 +33,7 @@
     "webpack": "^4.43.0"
   },
   "devDependencies": {
-    "webpack-cli": "^3.3.11",
+    "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
   }
 }
