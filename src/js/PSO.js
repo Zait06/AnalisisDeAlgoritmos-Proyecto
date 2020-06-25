@@ -1,4 +1,4 @@
-export class Particle{
+class Particle{
     constructor(figura){
         this.figure = figura;       // Figura a hacer
         this.length = 0
@@ -47,6 +47,7 @@ export class Particle{
             this.velocity[i] = Math.random()*101;   // Velocidad aleatorio
         }
         this.position[this.length-1] = Math.random()*51;
+        this.velocity[this.length-1] = Math.random()*51;
     }
 
     getPosition(){

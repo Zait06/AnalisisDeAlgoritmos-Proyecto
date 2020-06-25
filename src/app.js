@@ -2,14 +2,12 @@ import "./styles/main.scss";
 
 import { Rectangulo } from './js/Rectangulo'; // Importamos la clase Rectangulo
 import { Circulo } from './js/Circulo';
-import { Particle,PSO } from './js/PSO';
+import { PSO } from './js/PSO';
 const { UI } = require('./js/UI');
 var nj = require('@aas395/numjs');
 
 const ui = new UI();
 var rec = new Rectangulo(5,25,20,10);
-var part00 = new Particle('r');
-var part01 = new Particle('c');
 var pso_alg = new PSO(10,1,'r')
 
 ui.render(rec.getArea());
@@ -21,7 +19,6 @@ for(let i=0;i<4;i++)
     jeje[i] = Math.random()*101;   // Posicion aleatorio
 var otro = nj.array(jeje);
 console.log(otro);
-console.log(position.get(0));
 console.log(position.tolist());
 //console.log(part00.getPosition());
 //console.log(part01.getPosition());
