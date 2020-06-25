@@ -1,3 +1,5 @@
+const nj = require('@aas395/numjs');
+
 class Particle{
     constructor(figura){
         this.figure = figura;       // Figura a hacer
@@ -19,15 +21,17 @@ class Particle{
                 this.initCirc();
             break;
         }
+        this.position = nj.array(this.position);
+        this.velocity = nj.array(this.velocity);
         this.score = 0;
-        this.best_score = 100e10;   // Mejor puntuacion 
-        this.bp = []    // Vector de posicion con mejor puntacion
+        this.best_score = 0;   // Mejor puntuacion 
+        this.bp = nj.zeros(this.length)   // Vector de posicion con mejor puntacion
     }
 
     initRect(){
         for(let i=0;i<this.length;i++){
-            this.position[i] = Math.random()*101;   // Posicion aleatorio
-            this.velocity[i] = Math.random()*101;   // Velocidad aleatorio
+            this.position[i] = parseFloat((Math.random()*101).toFixed(2));   // Posicion aleatorio
+            this.velocity[i] = parseFloat((Math.random()*101).toFixed(2));   // Velocidad aleatorio
         }
         if(this.position[0] > this.position[2]){
             let aux = this.position[0];
@@ -43,11 +47,11 @@ class Particle{
 
     initCirc(){
         for(let i=0;i<this.length-1;i++){
-            this.position[i] = Math.random()*101;   // Posicion aleatorio
-            this.velocity[i] = Math.random()*101;   // Velocidad aleatorio
+            this.position[i] = parseFloat((Math.random()*101).toFixed(2));   // Posicion aleatorio
+            this.velocity[i] = parseFloat((Math.random()*101).toFixed(2));   // Velocidad aleatorio
         }
-        this.position[this.length-1] = Math.random()*51;
-        this.velocity[this.length-1] = Math.random()*51;
+        this.position[this.length-1] = parseFloat((Math.random()*51).toFixed(2));
+        this.velocity[this.length-1] = parseFloat((Math.random()*51).toFixed(2));
     }
 
     getPosition(){
@@ -61,7 +65,7 @@ class Particle{
     // funcion para calcular el puntaje de la paticula
     score_function(){
         this.score = Math.random()*101; // Igualar a la función objetivo
-        if(this.score < this.best_score){   // Minimización
+        if(this.score > this.best_score){   // Minimización
             this.best_score = this.score;
             this.bp = this.position;
         }
@@ -70,11 +74,18 @@ class Particle{
     /*
         Calcular la velocidad de la particula
         v=α(bp−p)+β(gbp−p)
+        v=v+[α*rand1*(bp−p)]+[β*rand2*(gbp−p)]
     */
     calculate_velocity(gbp,alpha=0.6,beta=0.6){
+        let a = (this.bp.subtract(this.position)).multiply(alpha*Math.random());
+        let b = (nj.array(gbp).subtract(this.position)).multiply(beta*Math.random());
+        this.velocity = this.velocity.add(a.add(b));
+        this.position = this.position.add(this.velocity);
+        /*
         this.velocity = this.sum(this.multScalar(alpha,this.sub(this.bp,this.position)),
                                 this.multScalar(beta,this.sub(gbp,this.position)));
         this.position = this.sum(this.position,this.velocity)
+        */
     }
 
     sum(a,b){

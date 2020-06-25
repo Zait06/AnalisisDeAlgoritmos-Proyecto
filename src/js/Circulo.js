@@ -11,6 +11,6 @@ export class Circulo{
     }
 
     getArea(){
-        return Math.PI*Math.pow(r,2);
+        return Math.PI*Math.pow(this.r,2);
     }
 }
