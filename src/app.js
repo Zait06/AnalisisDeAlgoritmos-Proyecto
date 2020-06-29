@@ -1,9 +1,11 @@
 import "./styles/main.scss";
+import "./js/interfaz";
 
 import { Rectangulo } from './js/Rectangulo'; // Importamos la clase Rectangulo
 import { Circulo } from './js/Circulo';
 import { PSO } from './js/PSO';
 const { UI } = require('./js/UI');
+
 var nj = require('@aas395/numjs');
 
 const ui = new UI();
