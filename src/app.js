@@ -4,16 +4,13 @@ import "./js/interfaz";
 import { Rectangulo } from './js/Rectangulo'; // Importamos la clase Rectangulo
 import { Circulo } from './js/Circulo';
 import { PSO } from './js/PSO';
-const { UI } = require('./js/UI');
 
 var nj = require('@aas395/numjs');
 
-const ui = new UI();
 var rec = new Rectangulo(5,25,20,10);
 var cir = new Circulo(25,51,20);
 var pso_alg = new PSO(10,1,'r')         // Constructor de PSO
 
-ui.render(rec.getArea());
 console.log("Area del ciculo: "+cir.getArea())
 pso_alg.run_pso();                      // Correr algoritmo
 //console.log(pso_alg.population);
