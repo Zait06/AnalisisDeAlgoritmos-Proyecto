@@ -1,5 +1,6 @@
 import "./styles/main.scss";
 import "./js/interfaz";
+import "./js/simulacion";
 
 import { Rectangulo } from './js/Rectangulo'; // Importamos la clase Rectangulo
 import { Circulo } from './js/Circulo';
