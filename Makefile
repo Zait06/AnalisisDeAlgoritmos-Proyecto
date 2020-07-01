@@ -6,4 +6,4 @@ limpiarCache:
 delNodeMod:
 	rm -R node_modules
 delJson:
-	rm package-lock.jason
+	rm package-lock.json
