@@ -30,8 +30,8 @@ class Particle{
 
     initRect(){
         for(let i=0;i<this.length;i++){
-            this.position[i] = parseFloat((Math.random()*101).toFixed(2));   // Posicion aleatorio
-            this.velocity[i] = parseFloat((Math.random()*101).toFixed(2));   // Velocidad aleatorio
+            this.position[i] = Math.random()*101;   // Posicion aleatorio
+            this.velocity[i] = Math.random()*101;   // Velocidad aleatorio
         }
         if(this.position[0] > this.position[2]){
             let aux = this.position[0];
@@ -47,11 +47,11 @@ class Particle{
 
     initCirc(){
         for(let i=0;i<this.length-1;i++){
-            this.position[i] = parseFloat((Math.random()*101).toFixed(2));   // Posicion aleatorio
-            this.velocity[i] = parseFloat((Math.random()*101).toFixed(2));   // Velocidad aleatorio
+            this.position[i] = Math.random()*101;   // Posicion aleatorio
+            this.velocity[i] = Math.random()*101;   // Velocidad aleatorio
         }
-        this.position[this.length-1] = parseFloat((Math.random()*51).toFixed(2));
-        this.velocity[this.length-1] = parseFloat((Math.random()*51).toFixed(2));
+        this.position[this.length-1] = Math.random()*51;
+        this.velocity[this.length-1] = Math.random()*51;
     }
 
     getPosition(){
