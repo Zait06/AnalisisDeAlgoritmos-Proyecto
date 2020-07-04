@@ -1,13 +1,12 @@
 
 var figura = document.getElementById('figura-select');
-var boton_figuras = document.getElementById('btn-figuras');
 var boton_puntos = document.getElementById('btn-puntos');
 
 var grupo_rectangulo = document.getElementById('rectangle-group');
 var grupo_circulo = document.getElementById('circle-group');
 var grupo_marco = document.getElementById('frame-group');
 
-boton_figuras.addEventListener('click', ()=>{
+figura.addEventListener('change', ()=>{
 
     document.getElementById('Puntos').style.display = "block";
 
