@@ -1,9 +1,9 @@
-class Aleatorio{
+export class Aleatorio{
     constructor(arrayCoord, pantTamX, pantTamY, numPuntos){
         this.defTamVentana(pantTamX, pantTamY);
-        this.nPuntos= numPuntos;
-        this.rangoPos= [];
-        this.rangoNeg= [];
+        this.nPuntos = numPuntos;
+        this.rangoPos = [];
+        this.rangoNeg = [];
 
         if(arrayCoord.length==4)
             this.genRectNums(arrayCoord[0], arrayCoord[1], arrayCoord[2], arrayCoord[3]);
@@ -36,10 +36,14 @@ class Aleatorio{
             bndPos= 0; //Suponemos que el punto está dentro
             x= Math.random()*this.tamX;
             y= Math.random()*this.tamY;
-            if(x>Math.min(x1, x2) && x<Math.max(x1, x2) && y>Math.min(y1, y2) && y<Math.max(y1, y2))
+            if(x>Math.min(x1, x2) && x<Math.max(x1, x2) && y>Math.min(y1, y2) && y<Math.max(y1, y2)){
                 bndPos=1;
-            else
+                this.rangoPos.push([x,y]);
+            }
+            else{
                 bndPos=-1;
+                this.rangoNeg.push([x,y])
+            }
 
             this.numGeneradosR.push([[x, y], bndPos]);
         }
@@ -62,10 +66,14 @@ class Aleatorio{
             x= Math.random()*this.tamX;
             y= Math.random()*this.tamY;
 
-            if(Math.pow(x-h, 2) + Math.pow(y-k, 2) < r*r)
+            if(Math.pow(x-h, 2) + Math.pow(y-k, 2) < r*r){
                 bndPos= 1;
-            else
+                this.rangoPos.push([x,y]);
+            }
+            else{
                 bndPos= -1;
+                this.rangoNeg.push([x,y]);
+            }
                
             this.numGeneradosC.push([[x, y], bndPos]);
         }
