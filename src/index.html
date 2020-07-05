@@ -8,97 +8,98 @@
     <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/darkly/bootstrap.min.css" rel="stylesheet" integrity="sha384-Bo21yfmmZuXwcN/9vKrA5jPUMhr7znVBBeLxT9MA4r2BchhusfJ6+n8TLGUcRAtL" crossorigin="anonymous">
 </head>
 <body>
-    <div class="main jumbotron">
-        <h1>Aprendizaje Evolutivo</h1>
-        <p>Selecciona un concepto a aprender: </p>
-        <div class="form-group">
-            <select class="custom-select" name="figura" id="figura-select">
-                <option value="">Elige una figura</option>
-                <option value="Rectangulo">Rectangulo</option>
-                <option value="Circulo">Círculo</option>
-                <option value="Marco">Marco</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="puntos_aleatorios">Cantidad de Puntos Aleatorios:</label>
-            <input type="number" class="form-control form-control-sm" id="cantidad_aleatorios" min="50" max="500" placeholder="50">
-        </div>
-        <button type="button" class="btn btn-primary" id="btn-figuras">Aceptar</button>
-    </div>
-    <div class="Puntos jumbotron" id="Puntos">
-        <h2>Puntos</h2>
-        <div class="points-group" id="points-group">
-            <div class="rectangle-group" id="rectangle-group">
-                <h3>Rectangulo</h3>
-                <div class="form-group">
-                    <label class="col-form-label col-form-label-sm" for="Punto_1">Punto 1</label>
-                    <input type="number" class="form-control form-control-sm" placeholder="coordenada X">
-                    <input type="number" class="form-control form-control-sm" placeholder="coordenada Y">
-                </div>
-                <div class="form-group">
-                    <label class="col-form-label col-form-label-sm" for="Punto_2">Punto 2</label>
-                    <input type="number" class="form-control form-control-sm" placeholder="coordenada X">
-                    <input type="number" class="form-control form-control-sm" placeholder="coordenada Y">
-                </div>
+    <div class="main-container">
+        <div class="main jumbotron">
+            <h1>Aprendizaje Evolutivo</h1>
+            <p>Selecciona un concepto a aprender: </p>
+            <div class="form-group">
+                <select class="custom-select" name="figura" id="figura-select">
+                    <option value="">Elige una figura</option>
+                    <option value="Rectangulo">Rectangulo</option>
+                    <option value="Circulo">Círculo</option>
+                    <option value="Marco">Marco</option>
+                </select>
             </div>
-
-            <div class="circle-group" id="circle-group">
-                <h3>Círculo</h3>
-                <div class="form-group">
-                    <label class="col-form-label col-form-label-sm" for="Punto_1">Punto 1</label>
-                    <input type="number" class="form-control form-control-sm" placeholder="coordenada X">
-                    <input type="number" class="form-control form-control-sm" placeholder="coordenada Y">
-                </div>
-                <div class="form-group">
-                    <label class="col-form-label col-form-label-sm" for="radio">radio</label>
-                    <input type="number" class="form-control form-control-sm" placeholder="radio">
-                </div>
-            </div>
-
-            <div class="frame-group" id="frame-group">
-                <h3>Marco</h3>
-                <div class="form-group">
-                    <label class="col-form-label col-form-label-sm" for="Punto_1">Punto 1 superior izquierdo interno</label>
-                    <input type="number" class="form-control form-control-sm" placeholder="coordenada X">
-                    <input type="number" class="form-control form-control-sm" placeholder="coordenada Y">
-                </div>
-                <div class="form-group">
-                    <label class="col-form-label col-form-label-sm" for="Punto_2">Punto 2 inferior derecho interno</label>
-                    <input type="number" class="form-control form-control-sm" placeholder="coordenada X">
-                    <input type="number" class="form-control form-control-sm" placeholder="coordenada Y">
-                </div>
-                <div class="form-group">
-                    <label class="col-form-label col-form-label-sm" for="Punto_3">Punto 3 superior izquierdo externo</label>
-                    <input type="number" class="form-control form-control-sm" placeholder="coordenada X">
-                    <input type="number" class="form-control form-control-sm" placeholder="coordenada Y">
-                </div>
-                <div class="form-group">
-                    <label class="col-form-label col-form-label-sm" for="Punto_4">Punto 4 inferior derecho externo</label>
-                    <input type="number" class="form-control form-control-sm" placeholder="coordenada X">
-                    <input type="number" class="form-control form-control-sm" placeholder="coordenada Y">
-                </div>
+            <div class="form-group">
+                <label for="puntos_aleatorios">Cantidad de Puntos Aleatorios:</label>
+                <input type="number" class="form-control form-control-sm" id="cantidad_aleatorios" min="50" max="500" placeholder="50">
             </div>
         </div>
-        <button type="button" class="btn btn-primary" id="btn-puntos">Aceptar</button>
-    </div>
-    <div class="Evolutivo jumbotron" id="Evolutivo">
-        <h2>Configuración de Algoritmo Evolutivo</h2>
-        <div class="form-group">
-            <label for="tam_población">Tamaño de la población:</label>
-            <input type="number" class="form-control form-control-sm" id="tam-poblacion" placeholder="Escribe el tamaño de población...">
+        <div class="Puntos jumbotron" id="Puntos">
+            <h2>Puntos</h2>
+            <div class="points-group" id="points-group">
+                <div class="rectangle-group" id="rectangle-group">
+                    <h3>Rectangulo</h3>
+                    <div class="form-group">
+                        <label class="col-form-label col-form-label-sm" for="Punto_1">Punto 1</label>
+                        <input type="number" class="form-control form-control-sm" placeholder="coordenada X">
+                        <input type="number" class="form-control form-control-sm" placeholder="coordenada Y">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label col-form-label-sm" for="Punto_2">Punto 2</label>
+                        <input type="number" class="form-control form-control-sm" placeholder="coordenada X">
+                        <input type="number" class="form-control form-control-sm" placeholder="coordenada Y">
+                    </div>
+                </div>
+    
+                <div class="circle-group" id="circle-group">
+                    <h3>Círculo</h3>
+                    <div class="form-group">
+                        <label class="col-form-label col-form-label-sm" for="Punto_1">Punto 1</label>
+                        <input type="number" class="form-control form-control-sm" placeholder="coordenada X">
+                        <input type="number" class="form-control form-control-sm" placeholder="coordenada Y">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label col-form-label-sm" for="radio">radio</label>
+                        <input type="number" class="form-control form-control-sm" placeholder="radio">
+                    </div>
+                </div>
+    
+                <div class="frame-group" id="frame-group">
+                    <h3>Marco</h3>
+                    <div class="form-group">
+                        <label class="col-form-label col-form-label-sm" for="Punto_1">Punto 1 superior izquierdo interno</label>
+                        <input type="number" class="form-control form-control-sm" placeholder="coordenada X">
+                        <input type="number" class="form-control form-control-sm" placeholder="coordenada Y">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label col-form-label-sm" for="Punto_2">Punto 2 inferior derecho interno</label>
+                        <input type="number" class="form-control form-control-sm" placeholder="coordenada X">
+                        <input type="number" class="form-control form-control-sm" placeholder="coordenada Y">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label col-form-label-sm" for="Punto_3">Punto 3 superior izquierdo externo</label>
+                        <input type="number" class="form-control form-control-sm" placeholder="coordenada X">
+                        <input type="number" class="form-control form-control-sm" placeholder="coordenada Y">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label col-form-label-sm" for="Punto_4">Punto 4 inferior derecho externo</label>
+                        <input type="number" class="form-control form-control-sm" placeholder="coordenada X">
+                        <input type="number" class="form-control form-control-sm" placeholder="coordenada Y">
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary" id="btn-puntos">Aceptar</button>
         </div>
-        <div class="form-group">
-            <label for="num_generaciones">Número de Generaciones:</label>
-            <input type="number" class="form-control form-control-sm" id="num_generaciones" placeholder="Escribe el número de generaciones...">
+        <div class="Evolutivo jumbotron" id="Evolutivo">
+            <h2>Configuración de Algoritmo Evolutivo</h2>
+            <div class="form-group">
+                <label for="tam_población">Tamaño de la población:</label>
+                <input type="number" class="form-control form-control-sm" id="tam-poblacion" placeholder="Escribe el tamaño de población...">
+            </div>
+            <div class="form-group">
+                <label for="num_generaciones">Número de Generaciones:</label>
+                <input type="number" class="form-control form-control-sm" id="num_generaciones" placeholder="Escribe el número de generaciones...">
+            </div>
+    
+            <button type="button" class="btn btn-primary" id="btn-simualacion">Comenzar Simulación</button>
         </div>
-
-        <button type="button" class="btn btn-primary" id="btn-simualacion">Comenzar Simulación</button>
-    </div>
-
-    <div class="Simulacion jumbotron">
-        <h2>Corriendo Simulación</h2>
-        <div class="canvas">
-            <canvas id="simulacion-canvas" class="simulacion-canvas"></canvas>
+    
+        <div class="Simulacion jumbotron">
+            <h2>Simulación</h2>
+            <div class="canvas">
+                <canvas id="simulacion-canvas" class="simulacion-canvas"></canvas>
+            </div>
         </div>
     </div>
 </body>
