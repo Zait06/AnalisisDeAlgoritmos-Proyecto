@@ -21,7 +21,7 @@ class Particle{
                 this.initCirc();
             break;
         }
-        this.position = nj.array(this.position);
+        this.position = nj.array(this.position);    // Se pasa de Array a Numjs
         this.velocity = nj.array(this.velocity);
         this.score = 0;
         this.best_score = 0;   // Mejor puntuacion 
@@ -54,21 +54,91 @@ class Particle{
         this.velocity[this.length-1] = Math.random()*51;
     }
 
-    getPosition(){
-        return this.position;
-    }
-    
-    getVelocity(){
-        return this.velocity;
-    }
-
     // funcion para calcular el puntaje de la paticula
-    score_function(){
-        this.score = Math.random()*101; // Igualar a la función objetivo
-        if(this.score > this.best_score){   // Minimización
+    score_function(p,q,area){
+        // Función objetivo
+        this.score = 0.7*(this.countPoints(p,q)) + 0.3*Math.abs(area - this.getArea);
+        if(this.score > this.best_score){   // Maximizar
             this.best_score = this.score;
             this.bp = this.position;
         }
+    }
+
+    // Obtiene el area de la particula
+    getArea(){
+        let result = 0;
+        switch(this.figure){
+            case 'r':
+                let w = this.position.get(2) - this.position.get(0);
+                let h = this.position.get(1) - this.position.get(3);
+                result = w*h;
+            break;
+            case 'c':
+                result = Math.PI*Math.pow(this.position.get(2),2);
+            break;
+        }
+        return result;
+    }
+
+    // Cuenta los puntos que coinciden con el area de la particula
+    countPoints(pos,neg){
+        let aciertos = 0;
+        switch(this.figure){
+            case 'r':
+                aciertos = this.rectPoints(pos,neg);
+            break;
+            case 'c':
+                aciertos = this.circPoints(pos,neg);
+            break;
+        }
+        return aciertos;
+    }
+
+    rectPoints(pos,neg){
+        /*
+            En esta funcion se cuentan los puntos positivos que coinciden,
+            es decir, los que están dentro de la particula iguales a la figura original.
+            Y se cuentan los puntos negativos que coinciden, es decir, los puntos
+            que tiene por igual la particula y la figura original.
+        */
+        let x1 = this.position.get(0);
+        let y1 = this.position.get(1);
+        let x2 = this.position.get(2);
+        let y2 = this.position.get(3);
+        let coin = 0;
+        // Puntos positivos
+        for(let point of pos){
+            if(point[0]>Math.min(x1, x2) && point[0]<Math.max(x1, x2) && point[1]>Math.min(y1, y2) && point[1]<Math.max(y1, y2))
+                coin++;
+        }
+        // Puntos negativos
+        for(let point of neg){
+            if((point[0]<Math.min(x1, x2) || point[0]>Math.max(x1, x2)) && (point[1]<Math.min(y1, y2) || point[1]>Math.max(y1, y2)))
+                coin++;
+        }
+        return coin;
+    }
+
+    circPoints(pos,neg){
+        /*
+            En esta funcion se cuentan los puntos positivos que coinciden,
+            es decir, los que están dentro de la particula iguales a la figura original.
+            Y se cuentan los puntos negativos que coinciden, es decir, los puntos
+            que tiene por igual la particula y la figura original.
+        */
+        let h = this.position.get(0);
+        let k = this.position.get(1);
+        let r = this.position.get(2);
+        let coin = 0;
+        for(let point of pos){
+            if(Math.pow(point[0]-h, 2) + Math.pow(point[1]-k, 2) < r*r)
+                coin++;
+        }
+        for(let point of neg){
+            if(Math.pow(point[0]-h, 2) + Math.pow(point[1]-k, 2) > r*r)
+                coin++;
+        }
+        return coin;
     }
 
     /*
@@ -87,40 +157,20 @@ class Particle{
         this.position = this.sum(this.position,this.velocity)
         */
     }
-
-    sum(a,b){
-        let opera = [];
-        for(let i=0;i<this.length;i++)
-            opera.push(a[i]+b[i]);
-        return opera;
-    }
-
-    sub(a,b){
-        let opera = [];
-        for(let i=0;i<this.length;i++)
-            opera.push(a[i]-b[i]);
-        return opera;
-    }
-
-    multScalar(scalar,a){
-        let opera = [];
-        for(let i=0;i<this.length;i++)
-            opera.push(scalar*a[i]);
-        return opera;
-    }
 }
 
 export class PSO{
     constructor(num,genera,figura){
-        this.figure = figura;
-        this.best_score = 100e10;
-        this.gbp = []
-        this.num_population = num;
+        this.figure = figura;       // Figura a aprender
+        this.best_score = 0;        // Mejor puntaje
+        this.gbp = []               // Mejor posicion global
+        this.num_population = num;  // Tamanio de la poblacion
         this.population = [];       // particles
-        this.generations = genera;
+        this.generations = genera;  // Numero de genraciones
+        this.three_best_in_generation;  // Los mejores tres en la generación
     }
 
-    run_pso(){
+    run_pso(positives,negatives,areaFig){
         var scores = [];        // Puntuaciones de la particula
         var best_scores = [];   // Mejores puntuaciones
         var i;
@@ -133,20 +183,25 @@ export class PSO{
         while(i<this.generations){
             // Se calcula el socre de cada particula
             for(let p of this.population){
-                p.score_function();
+                p.score_function(positives,negatives,areaFig);
                 scores.push([p.score,p.position]);
             }
-            // Obtenemos el mejor puntaje de la poblacion
-            scores.sort((aa,bb)=>{  // Minimizar el problema
+            /*
+                Obtenemos el mejor puntaje de la poblacion
+                Maximizar el problema
+                Se ordena la puntuación mayor a la menor
+            */
+            scores.sort((aa,bb)=>{
                 let a = aa[0];
                 let b = bb[0];
-                return a-b;
+                return b-a;
             });
             best_scores.push(scores[0][0]);
             if(scores[0][0]<this.best_score){
                 this.best_score = scores[0][0];
                 this.gbp = scores[0][1];
             }
+            this.three_best_in_generation.push([scores[0],scores[1],scores[2]])
             // Calculamos las velocidades de cada particula
             for(let p of this.population)
                 p.calculate_velocity(this.gbp);
