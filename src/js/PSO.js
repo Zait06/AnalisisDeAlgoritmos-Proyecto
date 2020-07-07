@@ -24,8 +24,9 @@ class Particle{
         this.position = nj.array(this.position);    // Se pasa de Array a Numjs
         this.velocity = nj.array(this.velocity);
         this.score = 0;
+        this.diference = 0;
         this.best_score = 0;   // Mejor puntuacion 
-        this.best_area = 100e100; // Mejor area
+        this.best_dif_area = 100e10; // Mejor area
         this.bp = nj.zeros(this.length)   // Vector de posicion con mejor puntacion
     }
 
@@ -52,18 +53,18 @@ class Particle{
             this.velocity[i] = Math.random();       // Velocidad aleatorio
         }
         this.position[this.length-1] = Math.random()*51;
-        this.velocity[this.length-1] = Math.random()*51;
+        this.velocity[this.length-1] = Math.random();
     }
 
     // funcion para calcular el puntaje de la paticula
     score_function(p,q,area){
         // Función objetivo
         this.score = (this.countPoints(p,q));// + 0.2*Math.abs(area - this.getArea());
-        // let difArea = Math.abs(area - this.getArea());
-        let mineArea = this.getArea()
-        if((this.score>this.best_score)){   // Maximizar
+        this.diference = Math.abs(area - this.getArea());
+        if(this.score>this.best_score && this.diference<this.best_dif_area){   // Maximizar coincidencia en puntos
             this.best_score = this.score;
             this.bp = this.position;
+            this.best_dif_area = this.diference;
         }
     }
 
@@ -72,8 +73,8 @@ class Particle{
         let result = 0;
         switch(this.figure){
             case 'r':
-                let w = this.position.get(2) - this.position.get(0);
-                let h = this.position.get(1) - this.position.get(3);
+                let w = Math.abs(this.position.get(2) - this.position.get(0));
+                let h = Math.abs(this.position.get(1) - this.position.get(3));
                 result = w*h;
             break;
             case 'c':
@@ -158,7 +159,7 @@ class Particle{
         this.velocity = this.velocity.add(a.add(b));
         this.position = this.position.add(this.velocity);
 
-        if(this.figure == 'r') this.sortVector();
+        //if(this.figure == 'r') this.sortVector();
     }
 
     sortVector(){
