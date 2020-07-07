@@ -35,8 +35,8 @@ figura.addEventListener('change', ()=>{
     }
 });
 
-boton_puntos.addEventListener('click', ()=>{
+// boton_puntos.addEventListener('click', ()=>{
 
-    document.getElementById('Evolutivo').style.display = "block";
-});
+//     document.getElementById('Evolutivo').style.display = "block";
+// });
 
