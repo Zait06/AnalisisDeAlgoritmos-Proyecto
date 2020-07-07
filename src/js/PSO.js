@@ -25,13 +25,14 @@ class Particle{
         this.velocity = nj.array(this.velocity);
         this.score = 0;
         this.best_score = 0;   // Mejor puntuacion 
+        this.best_area = 100e100; // Mejor area
         this.bp = nj.zeros(this.length)   // Vector de posicion con mejor puntacion
     }
 
     initRect(){
         for(let i=0;i<this.length;i++){
             this.position[i] = Math.random()*101;   // Posicion aleatorio
-            this.velocity[i] = Math.random()*101;   // Velocidad aleatorio
+            this.velocity[i] = Math.random();       // Velocidad aleatorio
         }
         if(this.position[0] > this.position[2]){
             let aux = this.position[0];
@@ -48,7 +49,7 @@ class Particle{
     initCirc(){
         for(let i=0;i<this.length-1;i++){
             this.position[i] = Math.random()*101;   // Posicion aleatorio
-            this.velocity[i] = Math.random()*101;   // Velocidad aleatorio
+            this.velocity[i] = Math.random();       // Velocidad aleatorio
         }
         this.position[this.length-1] = Math.random()*51;
         this.velocity[this.length-1] = Math.random()*51;
@@ -57,8 +58,10 @@ class Particle{
     // funcion para calcular el puntaje de la paticula
     score_function(p,q,area){
         // Función objetivo
-        this.score = 0.7*(this.countPoints(p,q)) + 0.3*Math.abs(area - this.getArea);
-        if(this.score > this.best_score){   // Maximizar
+        this.score = (this.countPoints(p,q));// + 0.2*Math.abs(area - this.getArea());
+        // let difArea = Math.abs(area - this.getArea());
+        let mineArea = this.getArea()
+        if((this.score>this.best_score)){   // Maximizar
             this.best_score = this.score;
             this.bp = this.position;
         }
@@ -147,15 +150,44 @@ class Particle{
         v=v+[α*rand1*(bp−p)]+[β*rand2*(gbp−p)]
     */
     calculate_velocity(gbp,alpha=0.6,beta=0.6){
-        let a = (this.bp.subtract(this.position)).multiply(alpha*Math.random());
-        let b = (nj.array(gbp).subtract(this.position)).multiply(beta*Math.random());
+        let ran;
+        ran = Math.random();
+        let a = (this.bp.subtract(this.position)).multiply(alpha*ran);
+        ran = Math.random();
+        let b = (nj.array(gbp).subtract(this.position)).multiply(beta*ran);
         this.velocity = this.velocity.add(a.add(b));
         this.position = this.position.add(this.velocity);
-        /*
-        this.velocity = this.sum(this.multScalar(alpha,this.sub(this.bp,this.position)),
-                                this.multScalar(beta,this.sub(gbp,this.position)));
-        this.position = this.sum(this.position,this.velocity)
-        */
+
+        if(this.figure == 'r') this.sortVector();
+    }
+
+    sortVector(){
+        if(this.position.get(0) > this.position.get(2)){
+            this.position = nj.array(
+                [this.position.get(2),
+                this.position.get(1),
+                this.position.get(0),
+                this.position.get(3)]);
+
+            this.velocity = nj.array(
+                [this.velocity.get(2),
+                this.velocity.get(1),
+                this.velocity.get(0),
+                this.velocity.get(3)]);
+        }
+        if(this.position.get(1) < this.position.get(3)){
+            this.position = nj.array(
+                [this.position.get(0),
+                this.position.get(3),
+                this.position.get(2),
+                this.position.get(1)]);
+            
+            this.velocity = nj.array(
+                [this.velocity.get(0),
+                this.velocity.get(3),
+                this.velocity.get(2),
+                this.velocity.get(1)]);
+        }
     }
 }
 
@@ -167,11 +199,11 @@ export class PSO{
         this.num_population = num;  // Tamanio de la poblacion
         this.population = [];       // particles
         this.generations = genera;  // Numero de genraciones
-        this.three_best_in_generation;  // Los mejores tres en la generación
+        this.three_best_in_generation = [];  // Los mejores tres en la generación [posicion, score]
     }
 
     run_pso(positives,negatives,areaFig){
-        var scores = [];        // Puntuaciones de la particula
+        var scores = [];        // Puntuaciones de la particula [score,posicion]
         var best_scores = [];   // Mejores puntuaciones
         var i;
         // Generación de la poblacion
@@ -184,7 +216,7 @@ export class PSO{
             // Se calcula el socre de cada particula
             for(let p of this.population){
                 p.score_function(positives,negatives,areaFig);
-                scores.push([p.score,p.position]);
+                scores.push([p.score,p.position,p.getArea()]);
             }
             /*
                 Obtenemos el mejor puntaje de la poblacion
@@ -197,11 +229,13 @@ export class PSO{
                 return b-a;
             });
             best_scores.push(scores[0][0]);
-            if(scores[0][0]<this.best_score){
+            if(scores[0][0]>this.best_score){
                 this.best_score = scores[0][0];
                 this.gbp = scores[0][1];
             }
-            this.three_best_in_generation.push([scores[0],scores[1],scores[2]])
+            this.three_best_in_generation.push([[scores[0][1].tolist(),scores[0][0],scores[0][2]],
+                                                [scores[1][1].tolist(),scores[1][0],scores[1][2]],
+                                                [scores[2][1].tolist(),scores[2][0],scores[2][2]]])
             // Calculamos las velocidades de cada particula
             for(let p of this.population)
                 p.calculate_velocity(this.gbp);
