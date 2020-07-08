@@ -59,7 +59,7 @@ boton_puntos.addEventListener('click', ()=> {
   
         var rec = canvas.getContext('2d');
     
-        //rec.fillStyle = "#ffffff";
+        rec.strokeStyle = "#000000";
     
         var x = lista_coords[0];
         var y = lista_coords[1];
@@ -75,7 +75,7 @@ boton_puntos.addEventListener('click', ()=> {
 
         var circulo = canvas.getContext('2d');
 
-        circulo.fillStyle = "#ffffff";
+        circulo.strokeStyle = "#000000";
 
         var x = lista_coords[0];
         var y = lista_coords[1];
@@ -85,7 +85,6 @@ boton_puntos.addEventListener('click', ()=> {
 
         circulo.beginPath();
         circulo.arc(x ,y, radio, 0, Math.PI*2);
-        circulo.fill();
         circulo.stroke();
         
     }
@@ -131,9 +130,10 @@ var btn_simulacion = document.getElementById('btn-simulacion');
 function Print_rectangulo(list_figuras, num_generaciones) {
 
     var figura_rec = canvas.getContext('2d');
+    //figra_rec.strokeStyle = "#000000";
 
     for(let i=0; i<3; i++){
-
+        
         var x = list_figuras[num_generaciones-1][i][0][0];
         var y = list_figuras[num_generaciones-1][i][0][1];
         var rec_width = list_figuras[num_generaciones-1][i][0][2] - x;
@@ -144,8 +144,20 @@ function Print_rectangulo(list_figuras, num_generaciones) {
 
 }
 
-function Print_circulo(list_figuras){
+function Print_circulo(list_figuras, num_generaciones){
+    var figura_cir = canvas.getContext('2d');
+    figura_cir.strokeStyle = "#000000";
 
+    for(let i=0; i<3; i++){
+        
+        let x = list_figuras[num_generaciones-1][i][0][0];
+        let y = list_figuras[num_generaciones-1][i][0][1];
+        let r = list_figuras[num_generaciones-1][i][0][2];
+
+        figura_cir.beginPath();
+        figura_cir.arc(x ,y, r, 0, Math.PI*2);
+        figura_cir.stroke();
+    }
 }
 
 
@@ -156,15 +168,15 @@ btn_simulacion.addEventListener('click', ()=> {
     var ratio_1 = document.getElementById('ratio-1').value;
     var ratio_2 = document.getElementById('ratio-2').value;
 
-    var pso_alg = new PSO(tam_poblacion,num_generaciones,figura_inicial);         // Constructor de PSO
-    pso_alg.run_pso(ale.rangoPos,ale.rangoNeg,figura_usuario.getArea());          // Correr algoritmo
+    var pso_alg = new PSO(tam_poblacion,num_generaciones,figura_inicial);                   // Constructor de PSO
+    pso_alg.run_pso(ale.rangoPos,ale.rangoNeg,figura_usuario.getArea(),ratio_1,ratio_2);    // Correr algoritmo
 
     console.log(pso_alg.three_best_in_generation);
 
     if(figura_inicial == 'r') {
         Print_rectangulo(pso_alg.three_best_in_generation, num_generaciones);
     }else{
-        Print_circulo(pso_alg.three_best_in_generationm, num_generaciones);
+        Print_circulo(pso_alg.three_best_in_generation, num_generaciones);
     }
     
 });

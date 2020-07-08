@@ -83,7 +83,7 @@ class Particle{
                 result = Math.PI*Math.pow(this.position.get(2),2);
             break;
         }
-        return result;
+        return Math.abs(result);
     }
 
     // Cuenta los puntos que coinciden con el area de la particula
@@ -152,7 +152,7 @@ class Particle{
         v=α(bp−p)+β(gbp−p)
         v=v+[α*rand1*(bp−p)]+[β*rand2*(gbp−p)]
     */
-    calculate_velocity(gbp,alpha=0.6,beta=0.6){
+    calculate_velocity(gbp,alpha,beta){
         let ran;
         ran = Math.random();
         let a = (this.bp.subtract(this.position)).multiply(alpha*ran);
@@ -160,44 +160,13 @@ class Particle{
         let b = (nj.array(gbp).subtract(this.position)).multiply(beta*ran);
         this.velocity = this.velocity.add(a.add(b));
         this.position = this.position.add(this.velocity);
-
-        //if(this.figure == 'r') this.sortVector();
-    }
-
-    sortVector(){
-        if(this.position.get(0) > this.position.get(2)){
-            this.position = nj.array(
-                [this.position.get(2),
-                this.position.get(1),
-                this.position.get(0),
-                this.position.get(3)]);
-
-            this.velocity = nj.array(
-                [this.velocity.get(2),
-                this.velocity.get(1),
-                this.velocity.get(0),
-                this.velocity.get(3)]);
-        }
-        if(this.position.get(1) < this.position.get(3)){
-            this.position = nj.array(
-                [this.position.get(0),
-                this.position.get(3),
-                this.position.get(2),
-                this.position.get(1)]);
-            
-            this.velocity = nj.array(
-                [this.velocity.get(0),
-                this.velocity.get(3),
-                this.velocity.get(2),
-                this.velocity.get(1)]);
-        }
     }
 }
 
 export class PSO{
     constructor(num,genera,figura){
         this.figure = figura;       // Figura a aprender
-        this.best_score = 10000000000;        // Mejor puntaje
+        this.best_score = -100e10;        // Mejor puntaje
         this.gbp = []               // Mejor posicion global
         this.num_population = num;  // Tamanio de la poblacion
         this.population = [];       // particles
@@ -205,7 +174,7 @@ export class PSO{
         this.three_best_in_generation = [];  // Los mejores tres en la generación [posicion, score]
     }
 
-    run_pso(positives,negatives,areaFig){
+    run_pso(positives,negatives,areaFig,ra1,ra2){
         var scores = [];        // Puntuaciones de la particula [score,posicion]
         var best_scores = [];   // Mejores puntuaciones
         var i;
@@ -232,7 +201,7 @@ export class PSO{
                 return b-a;
             });
             best_scores.push(scores[0][0]);
-            if(scores[0][0]<this.best_score){
+            if(scores[0][0]>this.best_score){
                 this.best_score = scores[0][0];
                 this.gbp = scores[0][1];
             }
@@ -241,7 +210,7 @@ export class PSO{
                                                 [scores[2][1].tolist(),scores[2][0],scores[2][2]]])
             // Calculamos las velocidades de cada particula
             for(let p of this.population)
-                p.calculate_velocity(this.gbp);
+                p.calculate_velocity(this.gbp,ra1,ra2);
             scores = [];
             i++;
         }
