@@ -60,8 +60,10 @@ class Particle{
     score_function(p,q,area){
         // Función objetivo
         this.score = (this.countPoints(p,q));// + 0.2*Math.abs(area - this.getArea());
-        this.diference = Math.abs(area - this.getArea());
-        if(this.score>this.best_score && this.diference<this.best_dif_area){   // Maximizar coincidencia en puntos
+        let area_2 = this.getArea();
+        this.diference = Math.abs(area - area_2);
+        this.score = 0.9 * this.score - 0.1 * this.diference; 
+        if(this.score>this.best_score /*&& this.diference<this.best_dif_area*/){   // Maximizar coincidencia en puntos
             this.best_score = this.score;
             this.bp = this.position;
             this.best_dif_area = this.diference;
@@ -73,8 +75,8 @@ class Particle{
         let result = 0;
         switch(this.figure){
             case 'r':
-                let w = Math.abs(this.position.get(2) - this.position.get(0));
-                let h = Math.abs(this.position.get(1) - this.position.get(3));
+                let w = (this.position.get(2) - this.position.get(0));
+                let h = (this.position.get(1) - this.position.get(3));
                 result = w*h;
             break;
             case 'c':
@@ -195,7 +197,7 @@ class Particle{
 export class PSO{
     constructor(num,genera,figura){
         this.figure = figura;       // Figura a aprender
-        this.best_score = 0;        // Mejor puntaje
+        this.best_score = 10000000000;        // Mejor puntaje
         this.gbp = []               // Mejor posicion global
         this.num_population = num;  // Tamanio de la poblacion
         this.population = [];       // particles
@@ -230,7 +232,7 @@ export class PSO{
                 return b-a;
             });
             best_scores.push(scores[0][0]);
-            if(scores[0][0]>this.best_score){
+            if(scores[0][0]<this.best_score){
                 this.best_score = scores[0][0];
                 this.gbp = scores[0][1];
             }
