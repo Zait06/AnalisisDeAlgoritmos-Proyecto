@@ -35,6 +35,7 @@ class Particle{
             this.position[i] = Math.random()*101;   // Posicion aleatorio
             this.velocity[i] = Math.random();       // Velocidad aleatorio
         }
+        // Se ordenan las coordenadas con las restricciones de un rectangulo
         if(this.position[0] > this.position[2]){
             let aux = this.position[0];
             this.position[0] = this.position[2];
@@ -83,7 +84,7 @@ class Particle{
                 result = Math.PI*Math.pow(this.position.get(2),2);
             break;
         }
-        return Math.abs(result);
+        return result;
     }
 
     // Cuenta los puntos que coinciden con el area de la particula
