@@ -112,6 +112,7 @@ class Particle{
         let x2 = this.position.get(2);
         let y2 = this.position.get(3);
         let coin = 0;
+        
         // Puntos positivos
         for(let point of pos){
             if(point[0]>Math.min(x1, x2) && point[0]<Math.max(x1, x2) && point[1]>Math.min(y1, y2) && point[1]<Math.max(y1, y2))

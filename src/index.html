@@ -24,6 +24,8 @@
                 <label for="puntos_aleatorios">Cantidad de Puntos Aleatorios:</label>
                 <input type="number" class="form-control form-control-sm" id="cantidad_aleatorios" min="50" max="500" placeholder="50">
             </div>
+
+            <button type="button" class="btn btn-secondary" id="btn-limpiar">Limpiar</button>
         </div>
         <div class="Puntos jumbotron" id="Puntos">
             <h2>Puntos</h2>
@@ -100,11 +102,42 @@
                 <input type="number" class="form-control form-control-sm" id="ratio-2" placeholder="radio de aprendizaje 2...">
             </div>
     
-            <button type="button" class="btn btn-primary" id="btn-simulacion">Comenzar Simulación</button>
+            <button type="button" class="btn btn-success" id="btn-simulacion">Comenzar Simulación</button>
         </div>
     
         <div class="Simulacion jumbotron">
             <h2>Simulación</h2>
+            <div class="Datos-simulacion" id="Datos-simulacion">
+                <div class="form-group select-generacion">
+                    <label for="select-generacion">Seleciona Generación: </label>
+                    <input type="text" class="form-control form-control-sm" id="select-generacion" placeholder="Generación">
+                    <button type="button" class="btn btn-info" id="btn-select-generaciones">Aceptar</button>
+                </div>
+                <div class="Solucion-1 card mb-3">
+                    <div class="card-header">Solución 1</div>
+                    <div class="card-body"> 
+                        <h5 class="card-title">Datos de la solución</h5>
+                        <p>Aptitud: </p><p id="Puntuacion-1"></p>
+                        <p>Coordenadas: </p><p id="Coordenadas-1"></p>    
+                    </div>
+                </div>
+                <div class="Solucion-2 card mb-3">
+                    <div class="card-header">Solución 2</div>
+                    <div class="card-body"> 
+                        <h5 class="card-title">Datos de la solución</h5>
+                        <p>Aptitud: </p><p id="Puntuacion-2"></p>
+                        <p>Coordenadas: </p><p id="Coordenadas-2"></p>    
+                    </div>
+                </div>
+                <div class="Solucion-3 card mb-3">
+                    <div class="card-header">Solución 3</div>
+                    <div class="card-body"> 
+                        <h5 class="card-title">Datos de la solución</h5>
+                        <p>Aptitud: </p><p id="Puntuacion-3"></p>
+                        <p>Coordenadas: </p><p id="Coordenadas-3"></p>    
+                    </div>
+                </div>
+            </div>
             <div class="canvas">
                 <canvas id="simulacion-canvas" class="simulacion-canvas"></canvas>
             </div>

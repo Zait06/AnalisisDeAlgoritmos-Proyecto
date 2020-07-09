@@ -6,6 +6,7 @@ import { Rectangulo } from './js/Rectangulo'; // Importamos la clase Rectangulo
 import { Circulo } from './js/Circulo';
 import { Aleatorio } from './js/Aleatorio';
 import { PSO } from './js/PSO';
+import { Coordenada } from "./js/Coordenada";
 
 
 var boton_puntos = document.getElementById('btn-puntos');
@@ -129,10 +130,36 @@ var btn_simulacion = document.getElementById('btn-simulacion');
 
 function Print_rectangulo(list_figuras, num_generaciones) {
 
+    let Puntuacion_1 = document.getElementById('Puntuacion-1');
+    let Coordenadas_1 = document.getElementById('Coordenadas-1');
+    let Puntuacion_2 = document.getElementById('Puntuacion-2');
+    let Coordenadas_2 = document.getElementById('Coordenadas-2');
+    let Puntuacion_3 = document.getElementById('Puntuacion-3');
+    let Coordenadas_3 = document.getElementById('Coordenadas-3');
+    
+    //let num_puntos_aleatorios = document.getElementById('cantidad_aleatorios').value;
+
+    // Puntuacion_1.innerHTML = ((list_figuras[num_generaciones-1][0][1]*100) / num_puntos_aleatorios) + "/ 100";
+    // Puntuacion_2.innerHTML = ((list_figuras[num_generaciones-1][1][1]*100) / num_puntos_aleatorios) + "/ 100";
+    // Puntuacion_3.innerHTML = ((list_figuras[num_generaciones-1][2][1]*100) / num_puntos_aleatorios) + "/ 100";
+
+    Puntuacion_1.innerHTML = list_figuras[num_generaciones-1][0][1].toFixed(2);
+    Puntuacion_2.innerHTML = list_figuras[num_generaciones-1][1][1].toFixed(2);
+    Puntuacion_3.innerHTML = list_figuras[num_generaciones-1][2][1].toFixed(2);
+
+    Coordenadas_1.innerHTML = list_figuras[num_generaciones-1][0][0];
+    Coordenadas_2.innerHTML = list_figuras[num_generaciones-1][1][0];
+    Coordenadas_3.innerHTML = list_figuras[num_generaciones-1][2][0];
+
+    let arreglo_color = ['orange','blue','yellow'];
+    let index_color = 0;
+
     var figura_rec = canvas.getContext('2d');
-    //figra_rec.strokeStyle = "#000000";
 
     for(let i=0; i<3; i++){
+
+        figura_rec.strokeStyle = arreglo_color[index_color];
+        index_color++;
         
         var x = list_figuras[num_generaciones-1][i][0][0];
         var y = list_figuras[num_generaciones-1][i][0][1];
@@ -145,14 +172,41 @@ function Print_rectangulo(list_figuras, num_generaciones) {
 }
 
 function Print_circulo(list_figuras, num_generaciones){
-    var figura_cir = canvas.getContext('2d');
-    figura_cir.strokeStyle = "#000000";
+    
+    let Puntuacion_1 = document.getElementById('Puntuacion-1');
+    let Coordenadas_1 = document.getElementById('Coordenadas-1');
+    let Puntuacion_2 = document.getElementById('Puntuacion-2');
+    let Coordenadas_2 = document.getElementById('Coordenadas-2');
+    let Puntuacion_3 = document.getElementById('Puntuacion-3');
+    let Coordenadas_3 = document.getElementById('Coordenadas-3');
 
+    //let num_puntos_aleatorios = document.getElementById('cantidad_aleatorios').value;
+
+    // Puntuacion_1.innerHTML = ((list_figuras[num_generaciones-1][0][1]*100) / num_puntos_aleatorios) + "/ 100";
+    // Puntuacion_2.innerHTML = ((list_figuras[num_generaciones-1][1][1]*100) / num_puntos_aleatorios) + "/ 100";
+    // Puntuacion_3.innerHTML = ((list_figuras[num_generaciones-1][2][1]*100) / num_puntos_aleatorios) + "/ 100";
+
+    Puntuacion_1.innerHTML = list_figuras[num_generaciones-1][0][1].toFixed(2);
+    Puntuacion_2.innerHTML = list_figuras[num_generaciones-1][1][1].toFixed(2);
+    Puntuacion_3.innerHTML = list_figuras[num_generaciones-1][2][1].toFixed(2);
+
+    Coordenadas_1.innerHTML = list_figuras[num_generaciones-1][0][0];
+    Coordenadas_2.innerHTML = list_figuras[num_generaciones-1][1][0];
+    Coordenadas_3.innerHTML = list_figuras[num_generaciones-1][2][0];
+    
+    let arreglo_color = ['orange','blue','yellow'];
+    let index_color = 0;
+
+    var figura_cir = canvas.getContext('2d');
+   
     for(let i=0; i<3; i++){
+        
+        figura_cir.strokeStyle = arreglo_color[index_color];
+        index_color++;
         
         let x = list_figuras[num_generaciones-1][i][0][0];
         let y = list_figuras[num_generaciones-1][i][0][1];
-        let r = list_figuras[num_generaciones-1][i][0][2];
+        let r = Math.abs(list_figuras[num_generaciones-1][i][0][2]);
 
         figura_cir.beginPath();
         figura_cir.arc(x ,y, r, 0, Math.PI*2);
@@ -168,6 +222,10 @@ btn_simulacion.addEventListener('click', ()=> {
     var ratio_1 = document.getElementById('ratio-1').value;
     var ratio_2 = document.getElementById('ratio-2').value;
 
+    var Datos_simulacion = document.getElementById('Datos-simulacion');
+    Datos_simulacion.style.display = 'grid';
+
+
     var pso_alg = new PSO(tam_poblacion,num_generaciones,figura_inicial);                   // Constructor de PSO
     pso_alg.run_pso(ale.rangoPos,ale.rangoNeg,figura_usuario.getArea(),ratio_1,ratio_2);    // Correr algoritmo
 
@@ -182,6 +240,28 @@ btn_simulacion.addEventListener('click', ()=> {
 });
 
 
+
+var boton_limpiar = document.getElementById('btn-limpiar');
+
+boton_limpiar.addEventListener('click', () => {
+
+    let Datos_simulacion = document.getElementById('Datos-simulacion');
+    let input = document.querySelectorAll('input.form-control');
+    for(let i=0; i<input.length; i++){
+        input[i].value = "";
+    }
+    canvas.width = canvas.width;    
+    Datos_simulacion.style.display = 'none';
+});
+
+var btn_select_generaciones = document.getElementById('btn-select-generaciones');
+
+btn_select_generaciones.addEventListener('click', () => {
+
+    
+
+
+});
 
 
 // var cir = new Circulo(25,51,20);
