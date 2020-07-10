@@ -7,25 +7,90 @@ import { Circulo } from './js/Circulo';
 import { Aleatorio } from './js/Aleatorio';
 import { PSO } from './js/PSO';
 import { Coordenada } from "./js/Coordenada";
+import { printThreshold } from "@aas395/numjs/src/config";
 
 
 var boton_puntos = document.getElementById('btn-puntos');
 var figura_inicial;
 var figura_usuario;
+var lista_coords;
 
 var ale;
+var pso_alg;
 
 var canvas = document.getElementById('simulacion-canvas');
 
-boton_puntos.addEventListener('click', ()=> {
 
-    var figura = document.getElementById('figura-select');
+function Print_Ventana_Rec() {
+
+    var rec = canvas.getContext('2d');
+    
+    rec.strokeStyle = "#000000";
+
+    var x = lista_coords[0];
+    var y = lista_coords[1];
+    var rec_width = lista_coords[2] - lista_coords[0];
+    var rec_height = lista_coords[3] - lista_coords[1];
+
+    figura_usuario = new Rectangulo(x,y, lista_coords[2], lista_coords[3]);
+
+    rec.strokeRect(x,y,rec_width,rec_height);  
+
+}
+
+function Print_Ventana_Circ() {
+
+    var circulo = canvas.getContext('2d');
+    
+    circulo.strokeStyle = "#000000";
+
+    var x = lista_coords[0];
+    var y = lista_coords[1];
+    var radio = lista_coords[2];
+
+    figura_usuario = new Circulo(x,y,radio);
+
+    circulo.beginPath();
+    circulo.arc(x ,y, radio, 0, Math.PI*2);
+    circulo.stroke();
+
+}
+
+function Print_Aleatorios(ale) {
+
+    var radio_puntos_aleatorios = 1;
+
+    var punto = canvas.getContext('2d');
+    for(let i = 0; i<ale.rangoPos.length; i++) {
+    
+        punto.fillStyle = "green";
+        punto.beginPath();
+        punto.arc(ale.rangoPos[i][0], ale.rangoPos[i][1], radio_puntos_aleatorios, 0, Math.PI*2);
+        punto.fill();
+        punto.stroke();
+
+    }
+
+    for(let i = 0; i<ale.rangoNeg.length; i++) {
+    
+        punto.fillStyle = "red";
+        punto.beginPath();
+        punto.arc(ale.rangoNeg[i][0], ale.rangoNeg[i][1], radio_puntos_aleatorios, 0, Math.PI*2);
+        punto.fill();
+        punto.stroke();
+
+    }
+}
+
+boton_puntos.addEventListener('click', ()=> {
 
     //Referencia del Canvas
     var width = canvas.width;
     var height = canvas.height;
 
-    var lista_coords = [];
+    var figura = document.getElementById('figura-select');
+
+    lista_coords = [];
 
     if(figura.value == 'Rectangulo') {
         
@@ -57,37 +122,10 @@ boton_puntos.addEventListener('click', ()=> {
     }
 
     if(lista_coords.length == 4) {
-  
-        var rec = canvas.getContext('2d');
-    
-        rec.strokeStyle = "#000000";
-    
-        var x = lista_coords[0];
-        var y = lista_coords[1];
-        var rec_width = lista_coords[2] - lista_coords[0];
-        var rec_height = lista_coords[3] - lista_coords[1];
-    
-        figura_usuario = new Rectangulo(x,y, lista_coords[2], lista_coords[3]);
-
-        rec.strokeRect(x,y,rec_width,rec_height);  
-
+        Print_Ventana_Rec();
     }
     else if(lista_coords.length == 3) {
-
-        var circulo = canvas.getContext('2d');
-
-        circulo.strokeStyle = "#000000";
-
-        var x = lista_coords[0];
-        var y = lista_coords[1];
-        var radio = lista_coords[2];
-
-        figura_usuario = new Circulo(x,y,radio);
-
-        circulo.beginPath();
-        circulo.arc(x ,y, radio, 0, Math.PI*2);
-        circulo.stroke();
-        
+        Print_Ventana_Circ();
     }
 
 
@@ -97,31 +135,11 @@ boton_puntos.addEventListener('click', ()=> {
 
     var max_width = width  - radio_puntos_aleatorios;
     var max_height = height - radio_puntos_aleatorios;
-
+    
     ale = new Aleatorio(lista_coords, max_width, max_height, num_puntos_aleatorios);
 
-    var punto = canvas.getContext('2d');
-    for(let i = 0; i<ale.rangoPos.length; i++) {
+    Print_Aleatorios(ale);
     
-        punto.fillStyle = "green";
-        punto.beginPath();
-        punto.arc(ale.rangoPos[i][0], ale.rangoPos[i][1], radio_puntos_aleatorios, 0, Math.PI*2);
-        punto.fill();
-        punto.stroke();
-
-    }
-
-    for(let i = 0; i<ale.rangoNeg.length; i++) {
-    
-        punto.fillStyle = "red";
-        punto.beginPath();
-        punto.arc(ale.rangoNeg[i][0], ale.rangoNeg[i][1], radio_puntos_aleatorios, 0, Math.PI*2);
-        punto.fill();
-        punto.stroke();
-
-    }
-
-
 });
 
 
@@ -136,20 +154,33 @@ function Print_rectangulo(list_figuras, num_generaciones) {
     let Coordenadas_2 = document.getElementById('Coordenadas-2');
     let Puntuacion_3 = document.getElementById('Puntuacion-3');
     let Coordenadas_3 = document.getElementById('Coordenadas-3');
+
+    Puntuacion_1.innerHTML = '';
+    Puntuacion_2.innerHTML = '';
+    Puntuacion_3.innerHTML = '';
+
+    Coordenadas_1.innerHTML = '';
+    Coordenadas_2.innerHTML = '';
+    Coordenadas_3.innerHTML = '';
     
-    //let num_puntos_aleatorios = document.getElementById('cantidad_aleatorios').value;
-
-    // Puntuacion_1.innerHTML = ((list_figuras[num_generaciones-1][0][1]*100) / num_puntos_aleatorios) + "/ 100";
-    // Puntuacion_2.innerHTML = ((list_figuras[num_generaciones-1][1][1]*100) / num_puntos_aleatorios) + "/ 100";
-    // Puntuacion_3.innerHTML = ((list_figuras[num_generaciones-1][2][1]*100) / num_puntos_aleatorios) + "/ 100";
-
     Puntuacion_1.innerHTML = list_figuras[num_generaciones-1][0][1].toFixed(2);
     Puntuacion_2.innerHTML = list_figuras[num_generaciones-1][1][1].toFixed(2);
     Puntuacion_3.innerHTML = list_figuras[num_generaciones-1][2][1].toFixed(2);
 
-    Coordenadas_1.innerHTML = list_figuras[num_generaciones-1][0][0];
-    Coordenadas_2.innerHTML = list_figuras[num_generaciones-1][1][0];
-    Coordenadas_3.innerHTML = list_figuras[num_generaciones-1][2][0];
+    Coordenadas_1.innerHTML = "[ "+list_figuras[num_generaciones-1][0][0][0].toFixed(2) +", "
+                                +list_figuras[num_generaciones-1][0][0][1].toFixed(2)+", "
+                                +list_figuras[num_generaciones-1][0][0][2].toFixed(2)+", "
+                                +list_figuras[num_generaciones-1][0][0][3].toFixed(2)+" ]";
+
+    Coordenadas_2.innerHTML = "[ "+list_figuras[num_generaciones-1][1][0][0].toFixed(2) +", "
+                                +list_figuras[num_generaciones-1][1][0][1].toFixed(2)+", "
+                                +list_figuras[num_generaciones-1][1][0][2].toFixed(2)+", "
+                                +list_figuras[num_generaciones-1][1][0][3].toFixed(2)+" ]";
+
+    Coordenadas_3.innerHTML = "[ "+list_figuras[num_generaciones-1][2][0][0].toFixed(2) +", "
+                                +list_figuras[num_generaciones-1][2][0][1].toFixed(2)+", "
+                                +list_figuras[num_generaciones-1][2][0][2].toFixed(2)+", "
+                                +list_figuras[num_generaciones-1][2][0][3].toFixed(2)+" ]";
 
     let arreglo_color = ['orange','blue','yellow'];
     let index_color = 0;
@@ -180,19 +211,29 @@ function Print_circulo(list_figuras, num_generaciones){
     let Puntuacion_3 = document.getElementById('Puntuacion-3');
     let Coordenadas_3 = document.getElementById('Coordenadas-3');
 
-    //let num_puntos_aleatorios = document.getElementById('cantidad_aleatorios').value;
+    Puntuacion_1.innerHTML = '';
+    Puntuacion_2.innerHTML = '';
+    Puntuacion_3.innerHTML = '';
 
-    // Puntuacion_1.innerHTML = ((list_figuras[num_generaciones-1][0][1]*100) / num_puntos_aleatorios) + "/ 100";
-    // Puntuacion_2.innerHTML = ((list_figuras[num_generaciones-1][1][1]*100) / num_puntos_aleatorios) + "/ 100";
-    // Puntuacion_3.innerHTML = ((list_figuras[num_generaciones-1][2][1]*100) / num_puntos_aleatorios) + "/ 100";
+    Coordenadas_1.innerHTML = '';
+    Coordenadas_2.innerHTML = '';
+    Coordenadas_3.innerHTML = '';
 
     Puntuacion_1.innerHTML = list_figuras[num_generaciones-1][0][1].toFixed(2);
     Puntuacion_2.innerHTML = list_figuras[num_generaciones-1][1][1].toFixed(2);
     Puntuacion_3.innerHTML = list_figuras[num_generaciones-1][2][1].toFixed(2);
 
-    Coordenadas_1.innerHTML = list_figuras[num_generaciones-1][0][0];
-    Coordenadas_2.innerHTML = list_figuras[num_generaciones-1][1][0];
-    Coordenadas_3.innerHTML = list_figuras[num_generaciones-1][2][0];
+    Coordenadas_1.innerHTML = "[ "+list_figuras[num_generaciones-1][0][0][0].toFixed(2) +", "
+                                +list_figuras[num_generaciones-1][0][0][1].toFixed(2)+", "
+                                +list_figuras[num_generaciones-1][0][0][2].toFixed(2)+" ]";
+
+    Coordenadas_2.innerHTML = "[ "+list_figuras[num_generaciones-1][1][0][0].toFixed(2) +", "
+                                +list_figuras[num_generaciones-1][1][0][1].toFixed(2)+", "
+                                +list_figuras[num_generaciones-1][1][0][2].toFixed(2)+" ]";
+
+    Coordenadas_3.innerHTML = "[ "+list_figuras[num_generaciones-1][2][0][0].toFixed(2) +", "
+                                +list_figuras[num_generaciones-1][2][0][1].toFixed(2)+", "
+                                +list_figuras[num_generaciones-1][2][0][2].toFixed(2)+" ]";
     
     let arreglo_color = ['orange','blue','yellow'];
     let index_color = 0;
@@ -215,6 +256,7 @@ function Print_circulo(list_figuras, num_generaciones){
 }
 
 
+
 btn_simulacion.addEventListener('click', ()=> {
 
     var tam_poblacion = document.getElementById('tam-poblacion').value;
@@ -226,7 +268,7 @@ btn_simulacion.addEventListener('click', ()=> {
     Datos_simulacion.style.display = 'grid';
 
 
-    var pso_alg = new PSO(tam_poblacion,num_generaciones,figura_inicial);                   // Constructor de PSO
+    pso_alg = new PSO(tam_poblacion,num_generaciones,figura_inicial);                   // Constructor de PSO
     pso_alg.run_pso(ale.rangoPos,ale.rangoNeg,figura_usuario.getArea(),ratio_1,ratio_2);    // Correr algoritmo
 
     console.log(pso_alg.three_best_in_generation);
@@ -254,13 +296,30 @@ boton_limpiar.addEventListener('click', () => {
     Datos_simulacion.style.display = 'none';
 });
 
+
 var btn_select_generaciones = document.getElementById('btn-select-generaciones');
 
 btn_select_generaciones.addEventListener('click', () => {
 
+    let num_generacion = document.getElementById('select-generacion').value;
+    let lista_generaciones = pso_alg.three_best_in_generation;
+
     
+    canvas.width = canvas.width;
 
+    Print_Aleatorios(ale);
 
+    if(figura_inicial == 'r'){
+        
+        Print_Ventana_Rec();
+        Print_rectangulo(lista_generaciones, num_generacion);
+    }
+    else{
+        Print_Ventana_Circ();
+        Print_circulo(lista_generaciones,num_generacion);
+    }
+        
+    
 });
 
 
