@@ -1,9 +1,10 @@
 const nj = require('@aas395/numjs');
 
 class Particle{
-    constructor(figura){
+    constructor(figura,rango){
         this.figure = figura;       // Figura a hacer
         this.length = 0
+        this.rango = rango
         /*
             position
             r = (x1,y1,x2,y2)
@@ -32,7 +33,7 @@ class Particle{
 
     initRect(){
         for(let i=0;i<this.length;i++){
-            this.position[i] = Math.random()*101;   // Posicion aleatorio
+            this.position[i] = Math.random()*this.rango;   // Posicion aleatorio
             this.velocity[i] = Math.random();       // Velocidad aleatorio
         }
         // Se ordenan las coordenadas con las restricciones de un rectangulo
@@ -50,10 +51,10 @@ class Particle{
 
     initCirc(){
         for(let i=0;i<this.length-1;i++){
-            this.position[i] = Math.random()*101;   // Posicion aleatorio
+            this.position[i] = Math.random()*this.rango;   // Posicion aleatorio
             this.velocity[i] = Math.random();       // Velocidad aleatorio
         }
-        this.position[this.length-1] = Math.random()*51;
+        this.position[this.length-1] = Math.random()*(this.rango/2);
         this.velocity[this.length-1] = Math.random();
     }
 
@@ -166,13 +167,14 @@ class Particle{
 }
 
 export class PSO{
-    constructor(num,genera,figura){
+    constructor(num,genera,figura,rango){
         this.figure = figura;       // Figura a aprender
         this.best_score = -100e10;        // Mejor puntaje
         this.gbp = []               // Mejor posicion global
         this.num_population = num;  // Tamanio de la poblacion
         this.population = [];       // particles
         this.generations = genera;  // Numero de genraciones
+        this.rango = rango          // Rango de ventana
         this.three_best_in_generation = [];  // Los mejores tres en la generación [posicion, score]
     }
 
@@ -182,7 +184,7 @@ export class PSO{
         var i;
         // Generación de la poblacion
         for(i=0;i<this.num_population;i++)
-            this.population.push(new Particle(this.figure));
+            this.population.push(new Particle(this.figure,this.rango));
         
         // Corriendo el algoritmo
         i=0;
