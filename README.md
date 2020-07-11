@@ -14,13 +14,13 @@ El algoritmo evolutivo utilizado fue Particle Swarm Optimization (PSO), que es u
 
 ## Funcionamiento
 
-Para ver el proyecto en funcionamiento puede visitar: [Proyecto Aprendizaje Evolutivo](https://zait06.github.io/AnalisisDeAlgoritmos-Proyecto/)
-
 El proyecto le solicitará al usuario elegir una figura, dependiendo la figura, este le lanzará campos extras que indican las coordenadas de la figura.
 
 En el caso del rectángulo se necesitan ingresar valores de:
-- <img src="https://latex.codecogs.com/gif.latex?x_1<x_2"" />
-- <img src="https://latex.codecogs.com/gif.latex?y_1>y_2"" />
+- <img src="https://latex.codecogs.com/gif.latex?x_1<x_2"/>
+- <img src="https://latex.codecogs.com/gif.latex?y_1>y_2"/>
+
+Para probar en funcionamiento puede visitar: [Proyecto Aprendizaje Evolutivo](https://zait06.github.io/AnalisisDeAlgoritmos-Proyecto/)
 
 ## Modulos utilizados:
 
