@@ -30,6 +30,8 @@ Despues de esto, se debe configurar el algoritmo evolutivo, el cual pedirá:
 
 Se da click en comenzar simulación y dibujará las figuras que corresponden a las partículas con diferentes colores, además se puede manipular para observar las mejores partículas en cada generación, además se pueden ver los puntajes/aptitudes de las mejores partículas en la epoca seleccionada.
 
+Para ingresar una nueva figura o bien modificar los datos cuales sean, se da click en el boton Limpiar para poder ingresar de nuevo los datos.
+
 Para probar en funcionamiento puede visitar: [Proyecto Aprendizaje Evolutivo](https://zait06.github.io/AnalisisDeAlgoritmos-Proyecto/)
 
 ## Modulos utilizados:
