@@ -13,7 +13,7 @@ Este es un proyecto escolar, el cuál, consiste en un algoritmo evolutivo que ti
 
 El algoritmo evolutivo utilizado fue Particle Swarm Optimization (PSO), que es un método adaptativo que utiliza agentes o partículas que se mueven a través del espacio de búsqueda utilizando los principios de evaluación, comparación e imitación.
 
-Para ver el proyecto en funcionamiento puede visitar: ![Proyecto Aprendizaje Evolutivo] (https://zait06.github.io/AnalisisDeAlgoritmos-Proyecto/)
+Para ver el proyecto en funcionamiento puede visitar: [Proyecto Aprendizaje Evolutivo](https://zait06.github.io/AnalisisDeAlgoritmos-Proyecto/)
 
 ### Modulos utilizados:
 
