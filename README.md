@@ -9,13 +9,18 @@
 Este es un proyecto escolar, el cuál, consiste en un algoritmo evolutivo que tiene como objetivo aprender algunas figuras, los cuales son:
 - Rectangulo
 - Circulo
-- Marcos
 
 El algoritmo evolutivo utilizado fue Particle Swarm Optimization (PSO), que es un método adaptativo que utiliza agentes o partículas que se mueven a través del espacio de búsqueda utilizando los principios de evaluación, comparación e imitación.
 
+## Funcionamiento
+
 Para ver el proyecto en funcionamiento puede visitar: [Proyecto Aprendizaje Evolutivo](https://zait06.github.io/AnalisisDeAlgoritmos-Proyecto/)
 
-### Modulos utilizados:
+El proyecto le solicitará al usuario elegir una figura, dependiendo la figura, este le lanzará campos extras que indican las coordenadas de la figura.
+
+En el caso del rectángulo se necesitan ingresar valores de <img src="https://latex.codecogs.com/gif.latex?x_1" />
+
+## Modulos utilizados:
 
 - WebPakc:
     * npm i webpack
