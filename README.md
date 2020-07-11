@@ -18,7 +18,9 @@ Para ver el proyecto en funcionamiento puede visitar: [Proyecto Aprendizaje Evol
 
 El proyecto le solicitará al usuario elegir una figura, dependiendo la figura, este le lanzará campos extras que indican las coordenadas de la figura.
 
-En el caso del rectángulo se necesitan ingresar valores de  <img src="https://latex.codecogs.com/gif.latex?x_1 < x_2"" />  y  <img src="https://latex.codecogs.com/gif.latex?y_1 > y_2"" />
+En el caso del rectángulo se necesitan ingresar valores de:
+- <img src="https://latex.codecogs.com/gif.latex?x_1 < x_2"" />
+- <img src="https://latex.codecogs.com/gif.latex?y_1 > y_2"" />
 
 ## Modulos utilizados:
 
