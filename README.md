@@ -1,11 +1,19 @@
 # AnalisisDeAlgoritmos-Proyecto
 
+## Creado por:
+- Benítez Morales Manuel Emilio (ManBenit)
+- Hernández López Ángel Zait (Zait06)
+- Tellez Perez Juan Manuel (juanM20)
+
+## Información general
 Este es un proyecto escolar, el cuál, consiste en un algoritmo evolutivo que tiene como objetivo aprender algunas figuras, los cuales son:
 - Rectangulo
 - Circulo
 - Marcos
 
-## Modulos utilizados:
+El algoritmo evolutivo utilizado fue Particle Swarm Optimization (PSO), que es un método adaptativo que utiliza agentes o partículas que se mueven a través del espacio de búsqueda utilizando los principios de evaluación, comparación e imitación.
+
+### Modulos utilizados:
 
 - WebPakc:
     * npm i webpack
