@@ -7,7 +7,7 @@ const autoprefixer = require('autoprefixer');
 module.exports = {
     entry: './src/app.js',      // Archivo que vamos a empaquetar
     output: {
-        path: path.resolve(__dirname,'../public'),     // dirección de salida __dirname es la constante a una direccion absoluta
+        path: path.resolve(__dirname,'../docs'),     // dirección de salida __dirname es la constante a una direccion absoluta
         filename: "js/bundle.js"             // Nombre del archivo empaquetado
     },
     devServer: {
