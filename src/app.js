@@ -104,6 +104,17 @@ boton_puntos.addEventListener('click', ()=> {   // Se detecta que figura selecci
         let coord2_X = document.getElementById('Rec-Coord2-X').value;
         let coord2_Y = document.getElementById('Rec-Coord2-Y').value;
 
+       
+        if(Number(coord1_X) > Number(coord2_X) || Number(coord1_Y) < Number(coord2_Y) ) {
+    
+            alert('Coordenadas incorrectas, vuelve a ingresar coordenadas.');
+            let input = document.querySelectorAll('input.form-control');
+            for(let i=0; i<input.length; i++){
+                input[i].value = "";
+            }
+            return;
+        }
+
         // Se guardan los datos en una lista
         lista_coords.push(coord1_X);    
         lista_coords.push(coord1_Y);
@@ -297,6 +308,11 @@ btn_simulacion.addEventListener('click', ()=> {
 
     console.log(pso_alg.three_best_in_generation);
 
+    var select_generaciones = document.getElementById('select-generacion');
+    for(let i=0; i<num_generaciones; i++){
+        select_generaciones.options[i+1] = new Option(i+1,i+1);
+    }
+
     if(figura_inicial == 'r') {
         Print_rectangulo(pso_alg.three_best_in_generation, num_generaciones);
     }else{
@@ -321,18 +337,17 @@ boton_limpiar.addEventListener('click', () => {         // Se limpian todos los 
 });
 
 
-var btn_select_generaciones = document.getElementById('btn-select-generaciones');
+var select_generaciones = document.getElementById('select-generacion');
 
-btn_select_generaciones.addEventListener('click', () => {
+select_generaciones.addEventListener('change', () => {
     /*
         Una vez ingresado el numero de generacion que se quiera saber
         este lo dibuja y borra los anteriores.
     */
 
-    let num_generacion = document.getElementById('select-generacion').value;
+    let num_generacion = select_generaciones.options[select_generaciones.selectedIndex].text;
     let lista_generaciones = pso_alg.three_best_in_generation;
-
-    
+ 
     canvas.width = canvas.width;
 
     Print_Aleatorios(ale);
