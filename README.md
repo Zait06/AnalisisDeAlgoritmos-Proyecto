@@ -12,6 +12,10 @@ Este es un proyecto escolar, el cuál, consiste en un algoritmo evolutivo que ti
 
 El algoritmo evolutivo utilizado fue Particle Swarm Optimization (PSO), que es un método adaptativo que utiliza agentes o partículas que se mueven a través del espacio de búsqueda utilizando los principios de evaluación, comparación e imitación.
 
+El código fuente se encuentra en la carpeta 'src'
+
+El reporte del proyecto es el archivo PDF con nombre 'Reporte_ProyectoFinal.pdf'
+
 ## Funcionamiento
 
 El proyecto le solicitará al usuario elegir una figura, dependiendo la figura, este le lanzará campos extras que indican las coordenadas de la figura.
