@@ -7,9 +7,6 @@ import { Rectangulo } from './js/Rectangulo'; // Importamos la clase Rectangulo
 import { Circulo } from './js/Circulo';
 import { Aleatorio } from './js/Aleatorio';
 import { PSO } from './js/PSO';
-// import { Coordenada } from "./js/Coordenada";
-// import { printThreshold } from "@aas395/numjs/src/config";
-
 
 var boton_puntos = document.getElementById('btn-puntos');   // Botón de accion
 var figura_inicial; // Se guarda el caracter de la figura seleccionada por el usuario
