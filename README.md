@@ -38,7 +38,7 @@ Se da click en comenzar simulación y dibujará las figuras que corresponden a l
 
 Para ingresar una nueva figura o bien modificar los datos cuales sean, se da click en el boton Limpiar para poder ingresar de nuevo los datos.
 
-Para probar en funcionamiento puede visitar: [Proyecto Aprendizaje Evolutivo](https://zait06.github.io/AnalisisDeAlgoritmos-Proyecto/)
+Para probar el funcionamiento del proyecto, puede visitar: [Proyecto Aprendizaje Evolutivo](https://zait06.github.io/AnalisisDeAlgoritmos-Proyecto/)
 
 ## Modulos utilizados:
 
