@@ -16,6 +16,8 @@ El código fuente se encuentra en la carpeta 'src'
 
 El reporte del proyecto es el archivo PDF con nombre 'Reporte_ProyectoFinal.pdf'
 
+Una pequeña descripción y funcionamiento del proyecto se encuentra en [Video_ProyectoFinal](https://drive.google.com/file/d/1338r1lMtp_MHmZtwsd7jIL4BKLCpTLzV/view?usp=sharing)
+
 ## Funcionamiento
 
 El proyecto le solicitará al usuario elegir una figura, dependiendo la figura, este le lanzará campos extras que indican las coordenadas de la figura.
