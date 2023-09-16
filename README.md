@@ -42,7 +42,7 @@ Para probar el funcionamiento del proyecto, puede visitar: [Proyecto Aprendizaje
 
 ## Modulos utilizados:
 
-- WebPakc:
+- WebPack:
     * npm i webpack
     * npm i webpack-cli
     * npm i webpack-dev-server
