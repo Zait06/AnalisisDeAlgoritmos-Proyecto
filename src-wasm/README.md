@@ -10,7 +10,7 @@
 ```sh
 mkdir build
 cd build
-cmake .. -GNinja -DCMAKE_PREFIX_PATH="C:/Eigen/include/eigen3"
+cmake .. -GNinja -DCMAKE_PREFIX_PATH="path/Eigen/include/eigen3"
 cmake --build .
 ```
 
@@ -19,6 +19,6 @@ cmake --build .
 ```sh
 mkdir build_em
 cd build_em
-emcmake cmake .. -GNinja -DEigen3_DIR="C:/Eigen/share/eigen3/cmake"
+emcmake cmake .. -GNinja -DEigen3_DIR="path/Eigen/share/eigen3/cmake"
 cmake --build .
 ```

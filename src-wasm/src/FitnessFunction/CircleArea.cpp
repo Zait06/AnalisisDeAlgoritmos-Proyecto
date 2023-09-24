@@ -1,5 +1,5 @@
 #include "CircleArea.h"
-#include <numbers>
+#include <cmath>
 
 CircleArea::CircleArea() {}
 
@@ -11,5 +11,5 @@ float CircleArea::compute(VectorType x) const {
     double y1 = x[3];
     double radio = pow(x1 - x0, 2) + pow(y1 - y0, 2);
     radio = sqrt(radio);
-    return std::numbers::pi * pow(radio, 2);
+    return M_PI * pow(radio, 2);
 }
