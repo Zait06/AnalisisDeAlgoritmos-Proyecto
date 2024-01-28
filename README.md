@@ -23,8 +23,8 @@ Una pequeña descripción y funcionamiento del proyecto se encuentra en [Video_P
 El proyecto le solicitará al usuario elegir una figura, dependiendo la figura, este le lanzará campos extras que indican las coordenadas de la figura.
 
 En el caso del rectángulo se necesitan ingresar valores de:
-- <img src="https://latex.codecogs.com/gif.latex?x_1<x_2"/>
-- <img src="https://latex.codecogs.com/gif.latex?y_1>y_2"/>
+- $x_1 < x_2$
+- $y_1 > y_2$
 
 Y para todas las coordenadans deben ser valores reales positivos; para los valores aleatorios, solo se solicita la cantidad de puntos que se quieren para ayudar al algoritmo a aprender. Una vez ingresado estos valores, se le da click en aceptar y se mostrarán las coordenadas aleatorias y la figura en la parte de Simulación.
 
