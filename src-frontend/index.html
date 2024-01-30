@@ -1,13 +1,47 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
+<meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/index.css" />
     <title>Vite App</title>
   </head>
   <body>
-    <div id="app"></div>
-    <script type="module" src="/main.js"></script>
+    <h1>Evolutive learning</h1>
+    <div class="container">
+      <div class="column">
+        <h3>Choose shape</h3>
+        <label for="shape">Choose a concept to learn:</label>
+        <select id="shape" name="shape">
+          <option value="none" disabled selected>Select an option</option>
+          <option value="rectangle">Rectangle</option>
+          <option value="circle">Circle</option>
+        </select>
+        <label for="randomNumber">Random number amount:</label>
+        <input type="number" id="randomNumber" name="randomNumber" step="10" value="0" />
+      </div>
+      <div class="column">
+        <h3>Points</h3>
+        <div class="column" id="shapeForm"></div>
+        <button id="btnShape">Create shape</button>
+      </div>
+      <div class="column">
+        <h3>EA configuration</h3>
+        <label for="popSize">Population size:</label>
+        <input type="number" id="popSize" name="popSize" step="5" value="10" />
+        <label for="iterGen">Generation iterator:</label>
+        <input type="number" id="iterGen" name="iterGen" value="5" />
+        <label for="ratio01">Ratio 1</label>
+        <input type="number" id="ratio01" name="ratio01" value="0.1" min="0.1" max="0.9" placeholder="Between 0.1 to 0.9" />
+        <label for="ratio02">Ratio 2</label>
+        <input type="number" id="ratio02" name="ratio02" value="0.1" min="0.1" max="0.9" placeholder="Between 0.1 to 0.9" />
+      </div>
+    </div>
+    <div class="container">
+      <button>Clean</button>
+      <button>Start simulation</button>
+    </div>
+    <script type="module" src="js/index.js"></script>
   </body>
 </html>
