@@ -44,12 +44,12 @@
 #plane {
   display: inline;
   border: 1px solid #000000;
-  background-color: #616161;
-  background-image: linear-gradient(white 2px, transparent 2px),
-  linear-gradient(90deg, white 2px, transparent 2px),
-  linear-gradient(rgba(255,255,255,.3) 1px, transparent 1px),
-  linear-gradient(90deg, rgba(255,255,255,.3) 1px, transparent 1px);
+  background-color: #fff;
+  background-image: linear-gradient(#9db1db 2px, transparent 2px),
+  linear-gradient(90deg, #9db1db 2px, transparent 2px),
+  linear-gradient(#3e77b6 1px, transparent 1px),
+  linear-gradient(90deg, #3e77b6 1px, transparent 1px);
   background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
   background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
-  color: #ccc;
+  color: #3e77b6;
 }
