@@ -24,7 +24,7 @@
       <div class="column">
         <h3>Points</h3>
         <div class="column" id="shapeForm"></div>
-        <button id="btnShape">Create shape</button>
+        <button id="btnCreateShape">Create shape</button>
       </div>
       <div class="column">
         <h3>EA configuration</h3>
@@ -39,8 +39,11 @@
       </div>
     </div>
     <div class="container">
-      <button>Clean</button>
+      <button id="btnClean">Clean</button>
       <button>Start simulation</button>
+    </div>
+    <div class="plane-container">
+      <canvas id="plane" height="700" width="700"></canvas>
     </div>
     <script type="module" src="js/index.js"></script>
   </body>
