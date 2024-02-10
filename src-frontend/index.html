@@ -14,12 +14,12 @@
         <h3>Choose shape</h3>
         <label for="shape">Choose a concept to learn:</label>
         <select id="shape" name="shape">
-          <option value="none" disabled selected>Select an option</option>
+          <option value="none" default>Select an option</option>
           <option value="rectangle">Rectangle</option>
           <option value="circle">Circle</option>
         </select>
         <label for="randomNumber">Random number amount:</label>
-        <input type="number" id="randomNumber" name="randomNumber" step="10" value="0" />
+        <input type="number" id="randomNumber" name="randomNumber" step="10" value="0" max="500"/>
       </div>
       <div class="column">
         <h3>Points</h3>
@@ -42,8 +42,12 @@
       <button id="btnClean">Clean</button>
       <button>Start simulation</button>
     </div>
+    <div style="height:100px">
+    </div>
     <div class="plane-container">
       <canvas id="plane" height="700" width="700"></canvas>
+      <div id="axis-y"></div>
+      <div id="axis-x"></div>
     </div>
     <script type="module" src="js/index.js"></script>
   </body>
