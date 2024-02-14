@@ -1,4 +1,5 @@
 
+const shapesAvailable = ['rectangle', 'circle']
 
 const rectangleForm = `
           Point 1
@@ -29,33 +30,111 @@ const circleForm = `
   <input class="valueShape" type="number" id="radius" step="50" value="0" placeholder="Radius" min="0" max="800"/>
 `
 
-var comboShape = document.getElementById('shape')
+const value = []
 var selectedShape = "";
+var canvas = document.getElementById('plane')
+var comboShape = document.getElementById('shape')
+var btnCreateShape = document.getElementById('btnCreateShape')
+
+function clearPlane() {
+  var ctx = canvas.getContext('2d')
+  ctx.clearRect(0, 0, canvas.width, canvas.height)
+}
+
+function clearCoords() {
+  const valueShape = document.getElementsByClassName('valueShape')
+  for (let vShape of valueShape)
+    vShape.value = 0
+  value.splice(0)
+}
+
+function expectedSize() {
+  if (selectedShape === 'rectangle')
+    return 4
+  if (selectedShape === 'circle')
+    return 3
+}
+
+canvas.addEventListener('mousemove', (evt) => {
+  const canvasRect = canvas.getBoundingClientRect()
+  const x = Math.round(evt.clientX - canvasRect.left)
+  const y = Math.round(evt.clientY - canvasRect.top)
+  var elem = null
+
+  if (!shapesAvailable.includes(selectedShape))
+    return
+
+  if (value.length === expectedSize()) return
+
+  clearPlane()
+  if (!value.length) {
+    elem = document.getElementById('x01')
+    elem.value = x
+    elem = document.getElementById('y01')
+    elem.value = y
+  } else if (selectedShape === 'rectangle') {
+    elem = document.getElementById('x02')
+    elem.value = x
+    elem = document.getElementById('y02')
+    elem.value = y
+    drawRectangle(value[0], value[1], x - value[0], y - value[1])
+  } else if (selectedShape === 'circle') {
+    const distance = Math.round(euclideanDistance({
+      x: value[0],
+      y: value[1]
+    }, {x, y}))
+    elem = document.getElementById('radius')
+    elem.value = distance
+    drawCircle(value[0], value[1], distance)
+  }
+})
+
+canvas.addEventListener('click', (evt) => {
+  evt.preventDefault()
+
+  if (value.length === expectedSize()) return
+  
+  const canvasRect = canvas.getBoundingClientRect()
+  const x = Math.round(evt.clientX - canvasRect.left)
+  const y = Math.round(evt.clientY - canvasRect.top)
+
+  if (selectedShape === 'rectangle') {  
+    value.push(x)
+    value.push(y)
+  } else if (selectedShape === 'circle') {
+    if (!value.length) {
+      value.push(x)
+      value.push(y)
+    } else {
+      value.push(euclideanDistance({
+        x: value[0],
+        y: value[1]
+      }, {x, y}))
+    }
+  }
+})
 
 comboShape.addEventListener('change', (evt) => {
   const select = evt.target;
   selectedShape = select.value
+  value.splice(0)
   if (select.value === 'rectangle')
     document.querySelector('#shapeForm').innerHTML = rectangleForm;
   else if (select.value === 'circle')
     document.querySelector('#shapeForm').innerHTML = circleForm;
 })
 
-var canvas = document.getElementById('plane')
-var btnCreateShape = document.getElementById('btnCreateShape')
-const clearPlane = () => {
-  var ctx = canvas.getContext('2d');
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-}
-
-document.getElementById('btnClean').addEventListener('click', clearPlane)
+document.getElementById('btnClean').addEventListener('click', () => {
+  clearPlane()
+  clearCoords()
+})
 
 btnCreateShape.addEventListener('click', (evt) => {
   evt.preventDefault();
   clearPlane()
 
   const valueShape = document.getElementsByClassName('valueShape')
-  const value = []
+  value.splice(0)
 
   for (let idx = 0; idx < valueShape.length; idx++)
     value.push(valueShape[idx].value)
@@ -105,3 +184,9 @@ function drawAxis() {
 }
 
 drawAxis()
+
+function euclideanDistance(pointA, pointB) {
+  const xd = Math.pow(pointA.x - pointB.x, 2)
+  const yd = Math.pow(pointA.x - pointB.x, 2)
+  return Math.sqrt(xd + yd)
+}
